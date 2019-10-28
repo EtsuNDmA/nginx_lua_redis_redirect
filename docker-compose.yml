@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  nginx:
+    image: openresty/openresty:alpine
+    container_name: openresty_nginx
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx:/usr/local/openresty/nginx/conf
+      - ./lua_scripts:/lua_scripts
+    entrypoint:
+      - /usr/local/openresty/bin/openresty
+      - -g
+      - daemon off;
+
+
+  redis:
+    container_name: openresty_redis
+    image: redis:4.0.14-alpine
+    volumes:
+      - ./redis:/data
+    entrypoint:
+      - /bin/sh
+      - /data/init_redis.sh

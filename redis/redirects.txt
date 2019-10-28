@@ -1,0 +1,1 @@
+HMSET redirects /foo / /bar / /buz /
